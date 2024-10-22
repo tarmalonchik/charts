@@ -1,0 +1,21 @@
+# deployment configuration
+replicaCount: 1
+name: speedtest-exporter
+port: 9469
+
+imageOverride: "billimek/prometheus-speedtest-exporter:latest"
+
+services:
+  - name: '{{ $.Values.name }}'
+    type: ClusterIP
+    ports:
+      - name: tcp
+        port: 9469
+        targetPort: 9469
+        containerPort: 9469
+        protocol: TCP
+
+resources:
+  limits:
+    cpu: '50m'
+    memory: '50Mi'
